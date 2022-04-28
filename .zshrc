@@ -15,6 +15,8 @@ export ZSH=/usr/share/oh-my-zsh/
 # if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
 ZSH_THEME="darkblood"
 
+colores=true # for the color bar
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -441,4 +443,8 @@ alias personal='cp -Rf /personal/* ~'
 #sysinfo
 #sysinfo-retro
 #cpufetch
-colorscript random
+#colorscript random
+
+if [ "$colores" = true ] ; then
+  seq 1 $(tput cols) | sort -R | sparklines | lolcat
+fi
