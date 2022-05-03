@@ -28,8 +28,7 @@ colores=true # for the color bar
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
+# Uncomment the following line to use hyphen-insensitive completion.G
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
@@ -315,7 +314,7 @@ alias ngnupgconf="sudo nano /etc/pacman.d/gnupg/gpg.conf"
 alias nhosts="sudo $EDITOR /etc/hosts"
 alias nb="$EDITOR ~/.bashrc"
 alias nz="$EDITOR ~/.zshrc"
-alias nf="EDITOR ~/.config/fish/config.fish"
+alias nf="$EDITOR ~/.config/fish/config.fish"
 
 #gpg
 #verify signature for isos
@@ -423,7 +422,10 @@ alias rmgitcache="rm -r ~/.cache/git"
 
 #moving your personal files and folders from /personal to ~
 alias personal='cp -Rf /personal/* ~'
+alias victor='echo OH YEAH!!!'
 
+alias reload="source ~/.zshrc"
+alias run='make && make run'
 #create a file called .zshrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
 
