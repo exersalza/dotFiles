@@ -17,10 +17,14 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'wakatime/vim-wakatime'
 Plug 'github/copilot.vim'
+Plug 'vimsence/vimsence'
 call plug#end()
 
 " Get syntax files from config folder
 set runtimepath+=~/.config/nvim/syntax
+
+" Enable relative line numbers
+set rnu
 
 " Theme
 colorscheme palenight
@@ -35,13 +39,43 @@ vmap <c-c> <esc>
 omap <c-c> <esc>
 
 " add autoclose brackets
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}
-inoremap {;<CR> {<CR>};
+""inoremap " ""<left>
+""inoremap ' ''<left>
+""inoremap ( ()<left>
+""inoremap [ []<left>
+""inoremap { {}<left>
+""inoremap {<CR> {<CR>}
+""inoremap {;<CR> {<CR>};
+
+" edit binary using xxd format
+augroup Binary
+  au!
+  au BufReadPre *.bin let &bin=1
+  au BufReadPost *.bin if &bin | %!xxd
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+augroup END
+
+augroup Binary2
+  au!
+  au BufReadPre *.out let &bin=1
+  au BufReadPost *.out if &bin | %!xxd
+  au BufReadPost *.out set ft=xxd | endif
+  au BufWritePre *.out if &bin | %!xxd -r
+  au BufWritePre *.out endif
+  au BufWritePost *.out if &bin | %!xxd
+  au BufWritePost *.out set nomod | endif
+augroup END
+
+" Discord thingis
+let g:vimsence_small_text = 'NeoVim'
+let g:vimsence_small_image = 'neovim'
+let g:vimsence_editing_details = 'Editing: {}'
+let g:vimsence_editing_state = 'Working on: {}'
+
 
 " Syntax highlighting
 syntax on
@@ -93,7 +127,7 @@ set t_Co=256
 " ASM == JDH8
 augroup jdh8_ft
   au!
-  autocmd BufNewFile,BufRead *.asm    set filetype=jdh8
+  autocmd BufNewFile,BufRead *.asm    set filetype=nasm
 augroup END
 
 " SQL++ == SQL

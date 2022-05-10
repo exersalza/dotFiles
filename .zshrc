@@ -148,6 +148,8 @@ alias updte='sudo pacman -Syyu'
 alias updqte='sudo pacman -Syyu'
 alias upqll='paru -Syu --noconfirm'
 alias upal='paru -Syu --noconfirm'
+alias nvi='nvim'
+alias nivm='nvim'
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
@@ -426,6 +428,7 @@ alias victor='echo OH YEAH!!!'
 
 alias reload="source ~/.zshrc"
 alias run='make && make run'
+alias rms='shred -zu $@'
 #create a file called .zshrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
 
