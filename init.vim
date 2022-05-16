@@ -1,5 +1,10 @@
 call plug#begin()
+" Themes
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'rakr/vim-one'
+Plug 'vim-airline/vim-airline-themes'
+" Other Stuff
 Plug 'vim-airline/vim-airline'
 Plug 'wlangstroth/vim-racket'
 Plug 'sheerun/vim-polyglot'
@@ -27,7 +32,10 @@ set runtimepath+=~/.config/nvim/syntax
 set rnu
 
 " Theme
+" palenight, nord, one
 colorscheme palenight
+
+"let g:airline_theme='onedark'
 
 " Disable C-z from job-controlling neovim
 nnoremap <c-z> <nop>
