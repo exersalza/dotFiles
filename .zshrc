@@ -407,28 +407,34 @@ alias lta="leftwm-theme apply"
 alias ltupd="leftwm-theme update"
 alias ltupg="leftwm-theme upgrade"
 
-#arcolinux applications
-alias att="arcolinux-tweak-tool"
-alias adt="arcolinux-desktop-trasher"
-alias abl="arcolinux-betterlockscreen"
-alias agm="arcolinux-get-mirrors"
-alias amr="arcolinux-mirrorlist-rank-info"
-alias aom="arcolinux-osbeck-as-mirror"
-alias ars="arcolinux-reflector-simple"
-alias atm="arcolinux-tellme"
-alias avs="arcolinux-vbox-share"
-alias awa="arcolinux-welcome-app"
+#archlinux applications / when nothing happens change the variable below to "arcolinux"
+LVERSION="archlinux"
+alias att="$LVERSION-tweak-tool"
+alias adt="$LVERSION-desktop-trasher"
+alias abl="$LVERSION-betterlockscreen"
+alias agm="$LVERSION-get-mirrors"
+alias amr="$LVERSION-mirrorlist-rank-info"
+alias aom="$LVERSION-osbeck-as-mirror"
+alias ars="$LVERSION-reflector-simple"
+alias atm="$LVERSION-tellme"
+alias avs="$LVERSION-vbox-share"
+alias awa="$LVERSION-welcome-app"
 
 #remove
 alias rmgitcache="rm -r ~/.cache/git"
 
 #moving your personal files and folders from /personal to ~
 alias personal='cp -Rf /personal/* ~'
-alias victor='echo OH YEAH!!!'
 
+
+# own keybind's
 alias reload="source ~/.zshrc"
 alias run='make && make run'
 alias rms='shred -zu $@'
+alias systemctl='sudo systemctl'
+alias sdocker='sudo docker'
+alias victor='echo "OHH YEAH!!" | lolcat'
+
 #create a file called .zshrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
 
@@ -449,7 +455,10 @@ alias rms='shred -zu $@'
 #sysinfo-retro
 #cpufetch
 #colorscript random
-
+eval ~/hiddenalias.sh
+eval $(thefuck --alias fuck)
 if [ "$colores" = true ] ; then
   seq 1 $(tput cols) | sort -R | sparklines | lolcat
 fi
+alias dserver='sudo dockerd -H 127.0.0.1:6969 -H unix:///var/run/docker.sock --api-cors-header "*"'
+
