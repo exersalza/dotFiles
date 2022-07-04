@@ -5,6 +5,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline-themes'
 " Other Stuff
+Plug 'chazmcgarvey/zencoding-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'wlangstroth/vim-racket'
 Plug 'sheerun/vim-polyglot'

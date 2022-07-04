@@ -13,7 +13,7 @@ export ZSH=/usr/share/oh-my-zsh/
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
-ZSH_THEME="darkblood"
+ZSH_THEME="cypher" # darkblood
 
 colores=true # for the color bar
 
@@ -434,6 +434,16 @@ alias rms='shred -zu $@'
 alias systemctl='sudo systemctl'
 alias sdocker='sudo docker'
 alias victor='echo "OHH YEAH!!" | lolcat'
+alias nom='npm'
+alias ipa='ip -c address'
+alias sshj='eval $SSHCONN'
+alias ufw='sudo ufw'
+
+# Python's
+alias venva='source venv/bin/activate'
+alias uvirun='uvicorn main:app --reload'
+alias pipr='pip install -r req'
+alias iknxr='pip install -i https://test.pypi.org/simple/ kenexar-core'
 
 #create a file called .zshrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
@@ -460,5 +470,5 @@ eval $(thefuck --alias fuck)
 if [ "$colores" = true ] ; then
   seq 1 $(tput cols) | sort -R | sparklines | lolcat
 fi
-alias dserver='sudo dockerd -H 127.0.0.1:6969 -H unix:///var/run/docker.sock --api-cors-header "*"'
+alias dserver='sudo systemctl stop docker && sudo dockerd -H 127.0.0.1:6969 -H unix:///var/run/docker.sock --api-cors-header "*"'
 
