@@ -10,6 +10,7 @@ f[1]="I love Coding"
 f[2]="<3"
 f[3]="Over the Rainbow..."
 f[4]="I eat rocks"
+f[5]="Using Arch btw..."
 
 size=${#f[@]}
 index=$((RANDOM % $size))
