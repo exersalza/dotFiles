@@ -1,7 +1,6 @@
 ###
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 #installation via script from github
 #export ZSH="/home/$USER/.oh-my-zsh"
@@ -94,6 +93,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nvim'
 fi
+#EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -115,7 +115,7 @@ unsetopt SHARE_HISTORY
 export HISTCONTROL=ignoreboth:erasedups
 
 # Make nano the default editor
-
+# MAKE VIM GREATER THAN NANO
 export EDITOR='nvim'
 export VISUAL='nvim'
 
@@ -146,6 +146,7 @@ alias udpate='sudo pacman -Syyu'
 alias upate='sudo pacman -Syyu'
 alias updte='sudo pacman -Syyu'
 alias updqte='sudo pacman -Syyu'
+alias upate='sudo pacman -Syyu'
 alias upqll='paru -Syu --noconfirm'
 alias upal='paru -Syu --noconfirm'
 alias nvi='nvim'
@@ -160,7 +161,6 @@ alias fgrep='fgrep --color=auto'
 alias df='df -h'
 
 #keyboard
-alias give-me-azerty-be="sudo localectl set-x11-keymap be"
 alias give-me-qwerty-us="sudo localectl set-x11-keymap us"
 
 #pacman unlock
@@ -433,17 +433,28 @@ alias run='make && make run'
 alias rms='shred -zu $@'
 alias systemctl='sudo systemctl'
 alias sdocker='sudo docker'
-alias victor='echo "OHH YEAH!!" | lolcat'
+alias vector='echo "OHH YEAH!!" | lolcat'
 alias nom='npm'
 alias ipa='ip -c address'
 alias sshj='eval $SSHCONN'
 alias ufw='sudo ufw'
+alias nvz="$EDITOR ~/.config/nvim/init.vim"
+alias gch="upower -d"
+alias ssshd="systemctl start sshd"
+alias clera='clear'
+alias tard="tar -czvf $1"
+alias thmovpn="sudo openvpn /home/julian/Downloads/exersalza.ovpn"
+alias view="tiv"
+alias kermit="cat /home/julian/kermit.txt"
+alias token="cat /home/julian/.config/key"
+alias vncstart="vncserver :1"
+
 
 # Python's
 alias venva='source venv/bin/activate'
 alias uvirun='uvicorn main:app --reload'
 alias pipr='pip install -r req'
-alias iknxr='pip install -i https://test.pypi.org/simple/ kenexar-core'
+alias py='python'
 
 #create a file called .zshrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
@@ -465,7 +476,7 @@ alias iknxr='pip install -i https://test.pypi.org/simple/ kenexar-core'
 #sysinfo-retro
 #cpufetch
 #colorscript random
-eval ~/hiddenalias.sh
+#
 eval $(thefuck --alias fuck)
 if [ "$colores" = true ] ; then
   seq 1 $(tput cols) | sort -R | sparklines | lolcat
