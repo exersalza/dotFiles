@@ -12,7 +12,7 @@ export ZSH=/usr/share/oh-my-zsh/
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
-ZSH_THEME="cypher" # darkblood
+ZSH_THEME="robbyrussell" # darkblood, cypher
 
 colores=true # for the color bar
 
@@ -297,7 +297,7 @@ alias rg="rg --sort path"
 #get the error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
-#nano for important configuration files
+#nano(vim) for important configuration files
 #know what you do in these files
 alias nlxdm="sudo $EDITOR /etc/lxdm/lxdm.conf"
 alias nlightdm="sudo $EDITOR /etc/lightdm/lightdm.conf"
@@ -438,8 +438,8 @@ alias nom='npm'
 alias ipa='ip -c address'
 alias sshj='eval $SSHCONN'
 alias ufw='sudo ufw'
-alias nvz="$EDITOR ~/.config/nvim/init.vim"
-alias gch="upower -d"
+alias nvz="$EDITOR ~/.config/nvim/init.lua"
+alias gch="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias ssshd="systemctl start sshd"
 alias clera='clear'
 alias tard="tar -czvf $1"
@@ -448,7 +448,15 @@ alias view="tiv"
 alias kermit="cat /home/julian/kermit.txt"
 alias token="cat /home/julian/.config/key"
 alias vncstart="vncserver :1"
+alias nv="$EDITOR ~/.config/nvim/init.*"
+alias clip="xclip -selection clipboard"
+alias coffee="/home/julian/shenanigans/25393c33463527b61eb132803075d7bc/coffee.sh"
+alias lap="sudo create_ap wlp3s0 enp2s0 FreeVBucks freevbucks"
 
+# Js / Npm
+alias rdev="npm run dev"
+alias rbuild="npm run build"
+alias rpre="rbuild && npm run preview"
 
 # Python's
 alias venva='source venv/bin/activate'
