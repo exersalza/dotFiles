@@ -6,6 +6,7 @@
 #export ZSH="/home/$USER/.oh-my-zsh"
 #installation via paru -S oh-my-zsh-git
 export ZSH=/usr/share/oh-my-zsh/
+export BROWSER="brave"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -318,6 +319,10 @@ alias nb="$EDITOR ~/.bashrc"
 alias nz="$EDITOR ~/.zshrc"
 alias nf="$EDITOR ~/.config/fish/config.fish"
 
+
+alias nvc="$EDITOR ~/.config/nvim/init.lua"
+alias hc="$EDITOR ~/.config/hypr/hyprland.conf"
+
 #gpg
 #verify signature for isos
 alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
@@ -447,11 +452,15 @@ alias thmovpn="sudo openvpn /home/julian/Downloads/exersalza.ovpn"
 alias view="tiv"
 alias kermit="cat /home/julian/kermit.txt"
 alias token="cat /home/julian/.config/key"
-alias vncstart="vncserver :1"
+alias vncstart="wayvnc 0.0.0.0 -f 60"
 alias nv="$EDITOR ~/.config/nvim/init.*"
-alias clip="xclip -selection clipboard"
+alias nv.k="$EDITOR ~/.config/nvim/lua/core/mappings.lua"
+alias nv.p="$EDITOR ~/.config/nvim/lua/plugins/init.lua"
+alias clip="wl-copy"
 alias coffee="/home/julian/shenanigans/25393c33463527b61eb132803075d7bc/coffee.sh"
 alias lap="sudo create_ap wlp3s0 enp2s0 FreeVBucks freevbucks"
+alias wttrh="wttr hamburg"
+
 
 # Js / Npm
 alias rdev="npm run dev"
@@ -460,9 +469,14 @@ alias rpre="rbuild && npm run preview"
 
 # Python's
 alias venva='source venv/bin/activate'
+alias venvc='python3 -m venv venv'
 alias uvirun='uvicorn main:app --reload'
 alias pipr='pip install -r req'
 alias py='python'
+alias bai='python -m build . && pip install . $^'
+alias rlints='flake8 --statistics $(git ls-files "*.py") && pylint $(git ls-files "*.py")'
+
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 #create a file called .zshrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
