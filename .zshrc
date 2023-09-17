@@ -120,6 +120,8 @@ export HISTCONTROL=ignoreboth:erasedups
 export EDITOR='nvim'
 export VISUAL='nvim'
 
+alias vim="$EDITOR"
+
 #PS1='[\u@\h \W]\$ '
 
 if [ -d "$HOME/.bin" ] ;
@@ -160,9 +162,6 @@ alias fgrep='fgrep --color=auto'
 
 #readable output
 alias df='df -h'
-
-#keyboard
-alias give-me-qwerty-us="sudo localectl set-x11-keymap us"
 
 #pacman unlock
 alias unlock="sudo rm /var/lib/pacman/db.lck"
@@ -319,8 +318,6 @@ alias nb="$EDITOR ~/.bashrc"
 alias nz="$EDITOR ~/.zshrc"
 alias nf="$EDITOR ~/.config/fish/config.fish"
 
-
-alias nvc="$EDITOR ~/.config/nvim/init.lua"
 alias hc="$EDITOR ~/.config/hypr/hyprland.conf"
 
 #gpg
@@ -451,7 +448,6 @@ alias tard="tar -czvf $1"
 alias thmovpn="sudo openvpn /home/julian/Downloads/exersalza.ovpn"
 alias view="tiv"
 alias kermit="cat /home/julian/kermit.txt"
-alias token="cat /home/julian/.config/key"
 alias vncstart="wayvnc 0.0.0.0 -f 60"
 alias nv="$EDITOR ~/.config/nvim/init.*"
 alias nv.k="$EDITOR ~/.config/nvim/lua/core/mappings.lua"
@@ -460,7 +456,7 @@ alias clip="wl-copy"
 alias coffee="/home/julian/shenanigans/25393c33463527b61eb132803075d7bc/coffee.sh"
 alias lap="sudo create_ap wlp3s0 enp2s0 FreeVBucks freevbucks"
 alias wttrh="wttr hamburg"
-
+alias tmc="$EDITOR ~/.config/tmux/tmux.conf"
 
 # Js / Npm
 alias rdev="npm run dev"
@@ -503,5 +499,3 @@ eval $(thefuck --alias fuck)
 if [ "$colores" = true ] ; then
   seq 1 $(tput cols) | sort -R | sparklines | lolcat
 fi
-alias dserver='sudo systemctl stop docker && sudo dockerd -H 127.0.0.1:6969 -H unix:///var/run/docker.sock --api-cors-header "*"'
-
