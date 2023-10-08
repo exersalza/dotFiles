@@ -120,6 +120,7 @@ export HISTCONTROL=ignoreboth:erasedups
 export EDITOR='nvim'
 export VISUAL='nvim'
 
+export MANPAGER="less -isX"
 export LESS="-i -M -R -x4"
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -461,12 +462,15 @@ alias kermit="cat /home/julian/kermit.txt"
 alias vncstart="wayvnc 0.0.0.0 -f 60"
 alias nv="$EDITOR ~/.config/nvim/init.*"
 alias nv.k="$EDITOR ~/.config/nvim/lua/core/mappings.lua"
-alias nv.p="$EDITOR ~/.config/nvim/lua/plugins/init.lua"
+alias nv.p="$EDITOR ~/.config/nvim/lua/custom/plugins.lua"
 alias clip="wl-copy"
 alias coffee="/home/julian/shenanigans/25393c33463527b61eb132803075d7bc/coffee.sh"
 alias lap="sudo create_ap wlp3s0 enp2s0 FreeVBucks freevbucks"
 alias wttrh="wttr hamburg"
 alias tmc="$EDITOR ~/.config/tmux/tmux.conf"
+alias gitl="git log --graph --oneline --all"
+alias lesscat="cat $1 | less"
+alias tks="tmux kill-session"
 
 # Js / Npm
 alias rdev="npm run dev"
@@ -481,6 +485,8 @@ alias pipr='pip install -r req'
 alias py='python'
 alias bai='python -m build . && pip install . $^'
 alias rlints='flake8 --statistics $(git ls-files "*.py") && pylint $(git ls-files "*.py")'
+
+alias exit="~/.tmux_exit.sh"
 
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
