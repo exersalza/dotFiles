@@ -1,8 +1,7 @@
 ###
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-# Path to your oh-my-zsh installation.
-#installation via script from github
+# Path to your oh-my-zsh installation. installation via script from github
 #export ZSH="/home/$USER/.oh-my-zsh"
 #installation via paru -S oh-my-zsh-git
 export ZSH=/usr/share/oh-my-zsh/
@@ -486,7 +485,21 @@ alias py='python'
 alias bai='python -m build . && pip install . $^'
 alias rlints='flake8 --statistics $(git ls-files "*.py") && pylint $(git ls-files "*.py")'
 
-alias exit="~/.tmux_exit.sh"
+
+lfcd() {
+    tmp="$(mktemp)"
+    lf --last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
 
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
