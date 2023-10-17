@@ -6,7 +6,7 @@ devices:
 startCommand: "setxkbmap de"
 
 # the default speed for mouse movement and scrolling
-baseMouseSpeed: 750.0
+baseMouseSpeed: 350.0
 baseScrollSpeed: 20.0
 
 # the time it takes to accelerate to baseMouseSpeed (in ms), 0 to reach top speed immediately
@@ -16,8 +16,8 @@ mouseAccelerationCurve: 1.0
 # speed of the mouse when it starts moving
 startMouseSpeed: 0.0
 # same for deceleration
-mouseDecelerationTime: 300.0
-mouseDecelerationCurve: 3.0
+mouseDecelerationTime: 0.0
+mouseDecelerationCurve: 1.0
 
 # the rest of the config defines the layers with their bindings
 layers:
@@ -29,6 +29,7 @@ layers:
     # when a is held for 300ms, activate mouse layer
     a: tap-hold a ; toggle-layer mouse ; 300
     # right alt key toggles arrows layer
+    # I remaped scrl to my alt-gr key
     scrolllock: toggle-layer mouse
 # a layer for mouse movement
 - name: mouse
@@ -46,14 +47,17 @@ layers:
     i: move  0 -1
     p: scroll up
     n: scroll down
-    leftalt: speed 4.0
+      #leftalt: speed 4.0
     e: speed 0.3
+    w: speed 2.0
     capslock: speed 0.1
     f: button left
     d: button middle
     s: button right
-    # move to the top left corner
-    k0: "exec xdotool mousemove 0 0"
+    u: rightalt+left
+    o: rightalt+right
+      # move to the top left corner
+    #k0: "exec xdotool mousemove 0 0"
 # another layer for arrows and some other keys
 - name: arrows
   passThrough: false

@@ -470,6 +470,7 @@ alias tmc="$EDITOR ~/.config/tmux/tmux.conf"
 alias gitl="git log --graph --oneline --all"
 alias lesscat="cat $1 | less"
 alias tks="tmux kill-session"
+alias fixi3="xrandr --output Virtual1 --mode 1920x1080"
 
 # Js / Npm
 alias rdev="npm run dev"
