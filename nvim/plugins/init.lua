@@ -6,7 +6,7 @@ local default_plugins = {
   "google/vim-maktaba",
   "google/vim-glaive",
   "google/vim-codefmt",
-  {"wakatime/vim-wakatime", lazy = false},
+  "wakatime/vim-wakatime",
   {"christoomey/vim-tmux-navigator", lazy = false},
 
   {
@@ -147,6 +147,7 @@ local default_plugins = {
     end,
     config = function()
       require "plugins.configs.lspconfig"
+      require 'lspconfig'.clingd.setup{}
     end,
   },
 
