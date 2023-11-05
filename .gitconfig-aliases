@@ -1,0 +1,4 @@
+[alias]
+	st = status
+  co = checkout
+  ac = !sh -c \"git add . && git commit\"
