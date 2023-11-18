@@ -1,10 +1,6 @@
 local plugins = {
   "glepnir/lspsaga.nvim",
   {
-    "ThePrimeagen/vim-be-good",
-    lazy = false,
-  },
-  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {

@@ -3,11 +3,19 @@
 local default_plugins = {
 
   "nvim-lua/plenary.nvim",
-  "google/vim-maktaba",
-  "google/vim-glaive",
-  "google/vim-codefmt",
-  "wakatime/vim-wakatime",
+  {"wakatime/vim-wakatime", lazy = false},
   {"christoomey/vim-tmux-navigator", lazy = false},
+  {"mattn/emmet-vim", lazy = false},
+  {"windwp/nvim-ts-autotag", lazy = false},
+  {"folke/zen-mode.nvim", lazy = false},
+  {"maxmellon/vim-jsx-pretty", lazy = false},
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = {"MarkdownPreview", "MarkdownPreviewStop"},
+    lazy = false,
+    build = function () vim.fn["mkdp#util#install"]() end,
+    init = function () vim.g.mkdp_theme = "dark" end
+  },
 
   {
     "NvChad/base46",
@@ -142,13 +150,52 @@ local default_plugins = {
 
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     init = function()
       require("core.utils").lazy_load "nvim-lspconfig"
+      require("lspconfig").pyright.setup {}
+      require("lspconfig").clangd.setup {}
+      require("lspconfig").tsserver.setup {
+        on_attach = function(client)
+          client.resolved_capabilities.document_formatting = false
+          on_attach(client)
+        end,
+        filetypes = {"javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx"}
+      }
     end,
     config = function()
       require "plugins.configs.lspconfig"
-      require 'lspconfig'.clingd.setup{}
     end,
+    --[[ opts = {
+      servers = {
+        rust_analyzer = {
+          mason = false,
+          cmd = { vim.fn.expand("/usr/bin/rust-analyzer")},
+          settings = {
+            ["rust-analyzer"] = {
+              imports = {
+                granularity = {
+                  group = "module",
+                },
+                prefix = "self",
+              },
+              cargo = {
+                buildScripts = {
+                  enable = true
+                }
+              },
+              procMacro = {
+                enable = true
+              }
+            }
+          }
+        }
+      }
+    } ]]--
+  },
+  {
+    "kabouzeid/nvim-lspinstall",
+    lazy = false,
   },
 
   -- load luasnips + cmp related in insert mode only
