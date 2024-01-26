@@ -5,7 +5,6 @@
 #export ZSH="/home/$USER/.oh-my-zsh"
 #installation via paru -S oh-my-zsh-git
 export ZSH=/usr/share/oh-my-zsh/
-export BROWSER="brave"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -442,6 +441,7 @@ alias personal='cp -Rf /personal/* ~'
 # own keybind's
 alias reload="source ~/.zshrc"
 alias run='make && make run'
+alias crun='cargo run'
 alias rms='shred -zu $@'
 alias systemctl='sudo systemctl'
 alias sdocker='sudo docker'
@@ -462,15 +462,17 @@ alias vncstart="wayvnc 0.0.0.0 -f 60"
 alias nv="$EDITOR ~/.config/nvim/init.*"
 alias nv.k="$EDITOR ~/.config/nvim/lua/core/mappings.lua"
 alias nv.p="$EDITOR ~/.config/nvim/lua/custom/plugins.lua"
-alias clip="wl-copy"
-alias coffee="/home/julian/shenanigans/25393c33463527b61eb132803075d7bc/coffee.sh"
+alias nv.c="$EDITOR ~/.config/nvim/lua/custom/chadrc.lua"
+alias coffee="/home/julian/shenanigans/coffee.sh"
 alias lap="sudo create_ap wlp3s0 enp2s0 FreeVBucks freevbucks"
 alias wttrh="wttr hamburg"
 alias tmc="$EDITOR ~/.config/tmux/tmux.conf"
 alias gitl="git log --graph --oneline --all"
 alias lesscat="cat $1 | less"
 alias tks="tmux kill-session"
-alias fixi3="xrandr --output Virtual1 --mode 1920x1080"
+alias fixi3="xrandr --output Virtual1 --mode 1920x1080" # just to fix the res in my vm
+alias sml="sh -c 'mouseless &'"
+alias pwdc="pwd | clip"
 
 # Js / Npm
 alias rdev="npm run dev"
@@ -486,6 +488,14 @@ alias py='python'
 alias bai='python -m build . && pip install . $^'
 alias rlints='flake8 --statistics $(git ls-files "*.py") && pylint $(git ls-files "*.py")'
 
+# arduino dev stuff
+alias acl='arduino-cli'
+
+if [[ "$WAYLAND_DISPLAY" -ne "" ]]; then
+  alias clip="wl-copy"
+else 
+  alias clip="xclip -selection clipboard"
+fi
 
 lfcd() {
     tmp="$(mktemp)"
@@ -508,6 +518,8 @@ lfcd() {
 #in there. They will not be overwritten by skel.
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
+
+PATH="$PATH:/home/julian/.cargo/bin/"
 
 # reporting tools - install when not installed
 #neofetch

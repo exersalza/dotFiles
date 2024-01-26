@@ -14,4 +14,5 @@ if [[ ${#artist} -ge 15 ]]; then
 fi
 
 echo "${title} | ${artist}" > /tmp/current_song
+sleep 5
 done
