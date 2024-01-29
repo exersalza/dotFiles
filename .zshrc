@@ -2,9 +2,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation. installation via script from github
-#export ZSH="/home/$USER/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 #installation via paru -S oh-my-zsh-git
-export ZSH=/usr/share/oh-my-zsh/
+#export ZSH=/usr/share/oh-my-zsh/
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -13,69 +13,15 @@ export ZSH=/usr/share/oh-my-zsh/
 # if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
 ZSH_THEME="robbyrussell" # darkblood, cypher
 
-colores=true # for the color bar
+if [[ $SSH_CONNECTION ]]; then
+  colores=false # for the color bar
+else
+  colores=true
+fi
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# ZSH_THEME_RANDOM_IGNORED=(pygmalion tjkirch_mod)
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-# Uncomment the following line to use hyphen-insensitive completion.G
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git rust python)
 
 source $ZSH/oh-my-zsh.sh
 source "${HOME}/.zgen/zgen.zsh"
@@ -105,8 +51,8 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 setopt GLOB_DOTS
 #share commands between terminal instances or not
-unsetopt SHARE_HISTORY
-#setopt SHARE_HISTORY
+#unsetopt SHARE_HISTORY
+setopt SHARE_HISTORY
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -118,6 +64,7 @@ export HISTCONTROL=ignoreboth:erasedups
 export EDITOR='nvim'
 export VISUAL='nvim'
 
+# set nonworking less keybinds
 export MANPAGER="less -isX"
 export LESS="-i -M -R -x4"
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -128,8 +75,10 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-
+# drop in replacements
 alias vim="$EDITOR"
+alias grep="rg"
+alias ls="exa"
 
 #PS1='[\u@\h \W]\$ '
 
@@ -148,7 +97,7 @@ alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -alFh'
 alias l='ls'
-alias l.="ls -A | egrep '^\.'"
+alias l.="ls -A | grep '^\.'"
 alias lla='ls -la'
 
 #fix obvious typo's, OMFG
@@ -188,7 +137,7 @@ alias free="free -mt"
 #continue download
 alias wget="wget -c"
 
-#userlist
+#userlist love it
 alias userlist="cut -d: -f1 /etc/passwd"
 
 #merge new settings
@@ -227,13 +176,6 @@ alias cf='cp /etc/skel/.config/fish/config.fish ~/.config/fish/config.fish && ec
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
-
-#switch between lightdm and sddm
-alias tolightdm="sudo pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings --noconfirm --needed ; sudo systemctl enable lightdm.service -f ; echo 'Lightm is active - reboot now'"
-alias tosddm="sudo pacman -S sddm --noconfirm --needed ; sudo systemctl enable sddm.service -f ; echo 'Sddm is active - reboot now'"
-alias toly="sudo pacman -S ly --noconfirm --needed ; sudo systemctl enable ly.service -f ; echo 'Ly is active - reboot now'"
-alias togdm="sudo pacman -S gdm --noconfirm --needed ; sudo systemctl enable gdm.service -f ; echo 'Gdm is active - reboot now'"
-alias tolxdm="sudo pacman -S lxdm --noconfirm --needed ; sudo systemctl enable lxdm.service -f ; echo 'Lxdm is active - reboot now'"
 
 # kill commands
 # quickly kill conkies
@@ -325,9 +267,7 @@ alias ngnupgconf="sudo nano /etc/pacman.d/gnupg/gpg.conf"
 alias nhosts="sudo $EDITOR /etc/hosts"
 alias nb="$EDITOR ~/.bashrc"
 alias nz="$EDITOR ~/.zshrc"
-alias nf="$EDITOR ~/.config/fish/config.fish"
-
-alias hc="$EDITOR ~/.config/hypr/hyprland.conf"
+alias nh="$EDITOR ~/.config/hypr/hyprland.conf"
 
 #gpg
 #verify signature for isos
@@ -440,15 +380,13 @@ alias personal='cp -Rf /personal/* ~'
 
 # own keybind's
 alias reload="source ~/.zshrc"
-alias run='make && make run'
-alias crun='cargo run'
+alias mrun='make && make run'
 alias rms='shred -zu $@'
 alias systemctl='sudo systemctl'
 alias sdocker='sudo docker'
 alias vector='echo "OHH YEAH!!" | lolcat'
 alias nom='npm'
 alias ipa='ip -c address'
-alias sshj='eval $SSHCONN'
 alias ufw='sudo ufw'
 alias nvz="$EDITOR ~/.config/nvim/init.lua"
 alias gch="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
@@ -457,13 +395,13 @@ alias clera='clear'
 alias tard="tar -czvf $1"
 alias thmovpn="sudo openvpn /home/julian/Downloads/exersalza.ovpn"
 alias view="tiv"
-alias kermit="cat /home/julian/kermit.txt"
+alias kermit="cat /home/julian/shennanigans/kermit.txt"
 alias vncstart="wayvnc 0.0.0.0 -f 60"
 alias nv="$EDITOR ~/.config/nvim/init.*"
 alias nv.k="$EDITOR ~/.config/nvim/lua/core/mappings.lua"
 alias nv.p="$EDITOR ~/.config/nvim/lua/custom/plugins.lua"
 alias nv.c="$EDITOR ~/.config/nvim/lua/custom/chadrc.lua"
-alias coffee="/home/julian/shenanigans/coffee.sh"
+alias coffee="/home/julian/shennanigans/coffee.sh"
 alias lap="sudo create_ap wlp3s0 enp2s0 FreeVBucks freevbucks"
 alias wttrh="wttr hamburg"
 alias tmc="$EDITOR ~/.config/tmux/tmux.conf"
@@ -473,6 +411,7 @@ alias tks="tmux kill-session"
 alias fixi3="xrandr --output Virtual1 --mode 1920x1080" # just to fix the res in my vm
 alias sml="sh -c 'mouseless &'"
 alias pwdc="pwd | clip"
+alias whereami="uname -n" # when everything looks the same but isnt
 
 # Js / Npm
 alias rdev="npm run dev"
@@ -536,7 +475,7 @@ PATH="$PATH:/home/julian/.cargo/bin/"
 #sysinfo-retro
 #cpufetch
 #colorscript random
-#
+
 eval $(thefuck --alias fuck)
 if [ "$colores" = true ] ; then
   seq 1 $(tput cols) | sort -R | sparklines | lolcat
