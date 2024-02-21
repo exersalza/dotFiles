@@ -2,18 +2,15 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation. installation via script from github
-export ZSH="/home/$USER/.oh-my-zsh"
-#installation via paru -S oh-my-zsh-git
-#export ZSH=/usr/share/oh-my-zsh/
+export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
-ZSH_THEME="robbyrussell" # darkblood, cypher
+if [[ "$(whoami)" != "root" ]]; then # change theme for root, so you dont have to type whoami everytime
+	ZSH_THEME="robbyrussell" # darkblood, cypher
+else
+	ZSH_THEME="cypher" # darkblood, cypher
+fi
 
-if [[ $SSH_CONNECTION ]]; then
+if [[ $SSH_CONNECTION || $USER -eq "root" ]]; then
   colores=false # for the color bar
 else
   colores=true
@@ -33,12 +30,7 @@ source "${HOME}/.zgen/zgen.zsh"
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='nvim'
-fi
-#EDITOR='nvim'
+EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -78,7 +70,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # drop in replacements
 alias vim="$EDITOR"
 alias grep="rg"
-alias ls="exa"
 
 #PS1='[\u@\h \W]\$ '
 
@@ -93,12 +84,12 @@ fi
 ### ALIASES ###
 
 #list
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias ll='ls -alFh'
-alias l='ls'
-alias l.="ls -A | grep '^\.'"
-alias lla='ls -la'
+alias ls='exa --color=auto'
+alias la='exa -a'
+alias ll='exa -alFh'
+alias l='exa'
+alias l.="exa -A | rg '^\.'"
+alias lla='exa -la'
 
 #fix obvious typo's, OMFG
 alias cd..='cd ..'
@@ -112,9 +103,10 @@ alias upqll='paru -Syu --noconfirm'
 alias upal='paru -Syu --noconfirm'
 alias nvi='nvim'
 alias nivm='nvim'
+alias clera='clear'
 
 ## Colorize the grep command output for ease of use (good for log files)##
-alias grep='grep --color=auto'
+alias grep='rg --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
@@ -391,7 +383,6 @@ alias ufw='sudo ufw'
 alias nvz="$EDITOR ~/.config/nvim/init.lua"
 alias gch="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias ssshd="systemctl start sshd"
-alias clera='clear'
 alias tard="tar -czvf $1"
 alias thmovpn="sudo openvpn /home/julian/Downloads/exersalza.ovpn"
 alias view="tiv"
@@ -412,6 +403,7 @@ alias fixi3="xrandr --output Virtual1 --mode 1920x1080" # just to fix the res in
 alias sml="sh -c 'mouseless &'"
 alias pwdc="pwd | clip"
 alias whereami="uname -n" # when everything looks the same but isnt
+alias c="cargo" # shortcut for cargo
 
 # Js / Npm
 alias rdev="npm run dev"
