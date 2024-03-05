@@ -164,7 +164,7 @@
     },
     {
       "before": ["K"],
-      "commands": ["lineBreakInsert"],
+      "commands": ["editor.action.showDefinitionPreviewHover"],
       "silent": true
     }
   ],
@@ -186,5 +186,8 @@
       "before": ["<"],
       "commands": ["editor.action.outdentLines"]
     }
-  ]
+  ],
+  "workbench.activityBar.location": "top",
+  "zenMode.showTabs": "single",
+  "workbench.startupEditor": "none"
 }
