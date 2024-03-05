@@ -189,5 +189,9 @@
   ],
   "workbench.activityBar.location": "top",
   "zenMode.showTabs": "single",
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "workbench.editor.editorActionsLocation": "titleBar",
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "compact"
 }
