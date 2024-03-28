@@ -22,6 +22,8 @@ plugins=(git rust python)
 
 source $ZSH/oh-my-zsh.sh
 source "${HOME}/.zgen/zgen.zsh"
+
+PATH="$PATH:/home/julian/.cargo/bin/"
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -90,6 +92,7 @@ alias ll='exa -alFh'
 alias l='exa'
 alias l.="exa -A | rg '^\.'"
 alias lla='exa -la'
+alias vls="/usr/bin/ls" # if we have to use vanilla ls for some reason
 
 #fix obvious typo's, OMFG
 alias cd..='cd ..'
@@ -107,8 +110,7 @@ alias clera='clear'
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='rg --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias vgrep='grep --color=auto' # if we have to use vanilla grep for some reason
 
 #readable output
 alias df='df -h'
@@ -154,28 +156,11 @@ alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 #add new fonts
 alias update-fc='sudo fc-cache -fv'
 
-#copy/paste all content of /etc/skel over to home folder - backup of config created - beware
-alias skel='[ -d ~/.config ] || mkdir ~/.config && cp -Rf ~/.config ~/.config-backup-$(date +%Y.%m.%d-%H.%M.%S) && cp -rf /etc/skel/* ~'
-#backup contents of /etc/skel to hidden backup folder in home/user
-alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
-
-#copy shell configs
-alias cb='cp /etc/skel/.bashrc ~/.bashrc && echo "Copied."'
-alias cz='cp /etc/skel/.zshrc ~/.zshrc && exec zsh'
-alias cf='cp /etc/skel/.config/fish/config.fish ~/.config/fish/config.fish && echo "Copied."'
-
-#switch between bash and zsh
-alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
-alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
-
 # kill commands
 # quickly kill conkies
 alias kc='killall conky'
 # quickly kill polybar
 alias kp='killall polybar'
-# quickly kill picom
-alias kpi='killall picom'
 
 #hardware info --short
 alias hw="hwinfo --short"
@@ -201,10 +186,6 @@ alias rams='rate-mirrors --allow-root --protocol https arch  | sudo tee /etc/pac
 
 #mounting the folder Public for exchange between host and guest on virtualbox
 alias vbm="sudo /usr/local/bin/arcolinux-vbox-share"
-
-#enabling vmware services
-alias start-vmware="sudo systemctl enable --now vmtoolsd.service"
-alias sv="sudo systemctl enable --now vmtoolsd.service"
 
 #shopt
 #shopt -s autocd # change to named directory
@@ -257,7 +238,7 @@ alias nnsswitch="sudo $EDITOR /etc/nsswitch.conf"
 alias nsamba="sudo $EDITOR /etc/samba/smb.conf"
 alias ngnupgconf="sudo nano /etc/pacman.d/gnupg/gpg.conf"
 alias nhosts="sudo $EDITOR /etc/hosts"
-alias nb="$EDITOR ~/.bashrc"
+alias nb="$EDITOR ~/.bashrc" # mostly for server access
 alias nz="$EDITOR ~/.zshrc"
 alias nh="$EDITOR ~/.config/hypr/hyprland.conf"
 
@@ -302,9 +283,6 @@ alias sr="sudo reboot"
 #update betterlockscreen images
 alias bls="betterlockscreen -u /usr/share/backgrounds/arcolinux/"
 
-#give the list of all installed desktops - xsessions desktops
-alias xd="ls /usr/share/xsessions"
-
 # # ex = EXtractor for all kinds of archives
 # # usage: ex <file>
 ex ()
@@ -343,12 +321,6 @@ alias snapli="sudo snapper list"
 alias snapcr="sudo snapper -c root create"
 alias snapch="sudo snapper -c home create"
 
-#Leftwm aliases
-alias lti="leftwm-theme install"
-alias ltu="leftwm-theme uninstall"
-alias lta="leftwm-theme apply"
-alias ltupd="leftwm-theme update"
-alias ltupg="leftwm-theme upgrade"
 
 #archlinux applications / when nothing happens change the variable below to "arcolinux"
 LVERSION="archlinux"
@@ -404,6 +376,7 @@ alias sml="sh -c 'mouseless &'"
 alias pwdc="pwd | clip"
 alias whereami="uname -n" # when everything looks the same but isnt
 alias c="cargo" # shortcut for cargo
+alias cw="cargo watch -x -w src/ -x run"
 
 # Js / Npm
 alias rdev="npm run dev"
@@ -422,7 +395,7 @@ alias rlints='flake8 --statistics $(git ls-files "*.py") && pylint $(git ls-file
 # arduino dev stuff
 alias acl='arduino-cli'
 
-if [[ "$WAYLAND_DISPLAY" -ne "" ]]; then
+if [[ "$WAYLAND_DISPLAY" -ne "" ]]; then # what copy program to use
   alias clip="wl-copy"
 else 
   alias clip="xclip -selection clipboard"
@@ -449,24 +422,6 @@ lfcd() {
 #in there. They will not be overwritten by skel.
 
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
-
-PATH="$PATH:/home/julian/.cargo/bin/"
-
-# reporting tools - install when not installed
-#neofetch
-#screenfetch
-#alsi
-#paleofetch
-#fetch
-#hfetch
-#sfetch
-#ufetch
-#ufetch-arco
-#pfetch
-#sysinfo
-#sysinfo-retro
-#cpufetch
-#colorscript random
 
 eval $(thefuck --alias fuck)
 if [ "$colores" = true ] ; then
