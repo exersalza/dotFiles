@@ -377,6 +377,7 @@ alias pwdc="pwd | clip"
 alias whereami="uname -n" # when everything looks the same but isnt
 alias c="cargo" # shortcut for cargo
 alias cw="cargo watch -x -w src/ -x run"
+alias fs="fzf"
 
 # Js / Npm
 alias rdev="npm run dev"
@@ -424,6 +425,8 @@ lfcd() {
 [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
 
 eval $(thefuck --alias fuck)
+eval $(fzf --zsh)
+
 if [ "$colores" = true ] ; then
   seq 1 $(tput cols) | sort -R | sparklines | lolcat
 fi
