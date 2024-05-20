@@ -73,9 +73,7 @@ require("presence").setup({
   {
     "neovim/nvim-lspconfig",
     config = function ()
-      require("plugins.configs.lspconfig")
-      require("custom.configs.lspconfig")
-
+      require("configs.lspconfig")
     end
   },
   {
@@ -90,7 +88,7 @@ require("presence").setup({
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
     opts = function ()
-      return require "custom.configs.rust-tools"
+      return require "configs.rust-tools"
     end,
     config = function (_, opts)
       require("rust-tools").setup(opts)
@@ -99,7 +97,7 @@ require("presence").setup({
   {
     "nvim-telescope/telescope-ui-select.nvim",
     config = function ()
-      require("custom.configs.telescope-ui-select")
+      require("configs.telescope-ui-select")
       global = "fjdsk"
     end
   }

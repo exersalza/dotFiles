@@ -1,5 +1,5 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capas = require("plugins.configs.lspconfig").capabilities
+local on_attach = require("configs.lspconfig").on_attach
+local capas = require("configs.lspconfig").capabilities
 local lspconfig = require("lspconfig")
 local util = require "lspconfig/util"
 
