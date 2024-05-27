@@ -1,9 +1,11 @@
 ---@type ChadrcConfig
 local M = {}
 
+vim.cmd("set rnu")
+
 M.ui = { theme = 'bearded-arc' }
-M.plugins = 'custom.plugins'
-M.mappings = require('custom.mappings')
+M.plugins = 'plugins'
+M.mappings = require('mappings')
 
 vim.cmd("set scrolloff=5")
 return M
