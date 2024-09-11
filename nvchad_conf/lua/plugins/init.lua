@@ -1,11 +1,52 @@
 return {
   "glepnir/lspsaga.nvim",
   "nvim-lua/plenary.nvim",
-  { 
-    "nvchad/nvterm", 
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      opts.formatters_by_ft.typescriptreact = { "prettierd", "prettier" }
+      opts.formatters_by_ft.javascriptreact = { "prettierd","prettier" }
+    end,
+  },
+  {
+    "stevearc/vim-arduino",
+    keys = {
+      { "<leader>ac", "<cmd>ArduinoCompile<cr>",       desc = "Compile Sketch" },
+      { "<leader>ad", "<cmd>ArduinoCompileDeploy<cr>", desc = "Compile and Deploy Sketch" },
+      { "<leader>as", "<cmd>ArduinoSerial<cr>",        desc = "Open Serial Monitor" },
+    },
+  },
+
+  -- Arduino language server
+  -- {
+  --   "glebzlat/arduino-nvim",
+  --   config = function()
+  --     require("arduino-nvim").setup()
+  --   end,
+  --   ft = "arduino",
+  -- },
+  {
+    "arduino/arduino-language-server",
+    ft = "arduino",
+    config = function()
+      local lspconfig = require("lspconfig")
+      lspconfig.arduino_language_server.setup({
+        cmd = {
+          "arduino-language-server",
+          "-cli-config", [[ C:\Users\uie56181\AppData\Local\Arduino15/arduino-cli.yaml ]],
+          -- "-cli", [[ C:\Users\uie56181\Desktop\arduino\resources\app\lib\backend\resources\arduino-cli.exe ]],
+          -- "-clangd", "clangd",
+          -- "-fqbn", "esp8266:8266:nodemcuv2",
+        },
+      })
+    end,
+  },
+  {
+    "nvchad/nvterm",
     config = function()
       require("nvterm").setup()
-    end 
+    end
   },
   {
     "nvim-neotest/neotest",
@@ -25,28 +66,28 @@ return {
             runner = "pytest",
             args = { "--log-level", "DEBUG" },
           }),
-          require("neotest-rust"){
-            args = {"--no-capture" }
+          require("neotest-rust") {
+            args = { "--no-capture" }
           },
         },
       })
     end,
   },
-  {"mbbill/undotree", lazy = true},
-  {"tpope/vim-surround", lazy = false},
-  {"wakatime/vim-wakatime", lazy = false},
-  {"christoomey/vim-tmux-navigator", lazy = false},
-  {"mattn/emmet-vim", lazy = false},
-  {"windwp/nvim-ts-autotag", lazy = false},
-  {"folke/zen-mode.nvim", lazy = false},
-  {"maxmellon/vim-jsx-pretty", lazy = false},
-  {"Eandrju/cellular-automaton.nvim", lazy = false},
+  { "mbbill/undotree",                 lazy = true },
+  { "tpope/vim-surround",              lazy = false },
+  { "wakatime/vim-wakatime",           lazy = false },
+  { "christoomey/vim-tmux-navigator",  lazy = false },
+  { "mattn/emmet-vim",                 lazy = false },
+  { "windwp/nvim-ts-autotag",          lazy = false },
+  { "folke/zen-mode.nvim",             lazy = false },
+  { "maxmellon/vim-jsx-pretty",        lazy = false },
+  { "Eandrju/cellular-automaton.nvim", lazy = false },
   {
     "iamcco/markdown-preview.nvim",
-    cmd = {"MarkdownPreview", "MarkdownPreviewStop"},
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop" },
     lazy = false,
-    build = function () vim.fn["mkdp#util#install"]() end,
-    init = function () vim.g.mkdp_theme = "dark" end
+    build = function() vim.fn["mkdp#util#install"]() end,
+    init = function() vim.g.mkdp_theme = "dark" end
   },
   {
     "williamboman/mason.nvim",
@@ -58,17 +99,16 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    config = function ()
+    config = function()
       require("configs.lspconfig")
       require 'lspconfig'.pyright.setup {}
       require 'lspconfig'.lua_ls.setup {}
-
     end
   },
   {
     "rust-lang/rust.vim",
     ft = "rust",
-    init = function ()
+    init = function()
       vim.g.rustfmt_autosave = 1
     end
   },
@@ -76,21 +116,31 @@ return {
     "simrat39/rust-tools.nvim",
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
-    opts = function ()
+    opts = function()
       return require "configs.rust-tools"
     end,
-    config = function (_, opts)
+    config = function(_, opts)
       require("rust-tools").setup(opts)
     end
   },
   {
     "nvim-telescope/telescope-ui-select.nvim",
-    config = function ()
+    config = function()
       require("configs.telescope-ui-select")
       global = "fjdsk"
     end
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim", "lua", "vimdoc",
+        "html", "css", "rust", "arduino"
+      },
+    },
   }
 }
+
 
 
 -- return {
@@ -141,13 +191,4 @@ return {
 --     },
 --   },
 --
---   {
---     "nvim-treesitter/nvim-treesitter",
---     opts = {
---       ensure_installed = {
---         "vim", "lua", "vimdoc",
---         "html", "css"
---       },
---     },
---   },
 -- }

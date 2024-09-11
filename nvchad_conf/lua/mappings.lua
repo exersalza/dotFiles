@@ -27,12 +27,36 @@ map("v", "<A-j>", ":m '>+1<CR>gv=gv")
 map("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
 -- splits
-map("n", "<leader>sh", ":split<CR>", { desc = "Creates a horizontal split" })
+map("n", "<leader>sn", ":split<CR>", { desc = "Creates a horizontal split" })
 map("n", "<leader>sv", ":vsplit<CR>", { desc = "Creates a vertical split" })
 map("n", "<C-M-j>", ":resize -5<CR>")
 map("n", "<C-M-k>", ":resize +5<CR>")
 map("n", "<C-M-l>", ":vertical resize -5<CR>")
 map("n", "<C-M-h>", ":vertical resize +5<CR>")
+
+-- vim.keymap.set("n", "<C-h>", function()
+--   if vim.fn.winnr() == vim.fn.winnr('h') then
+--     vim.cmd("vertical resize -2")
+--   end
+-- end, { silent = true })
+--
+-- vim.keymap.set("n", "<C-j>", function() 
+--   if vim.fn.winnr() == vim.fn.winnr('j') then
+--     vim.cmd("resize +2")
+--   end
+-- end, { silent = true })
+--
+-- vim.keymap.set("n", "<C-k>", function()
+--   if vim.fn.winnr() == vim.fn.winnr('k') then
+--     vim.cmd("resize -2")
+--   end
+-- end, { silent = true })
+--
+-- vim.keymap.set("n", "<C-l>", function()
+--   if vim.fn.winnr() == vim.fn.winnr('l') then
+--     vim.cmd("vertical resize +2") 
+--   end
+-- end, { silent = true })
 
 -- tests
 --

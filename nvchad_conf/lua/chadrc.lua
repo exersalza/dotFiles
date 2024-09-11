@@ -12,7 +12,6 @@ M.ui = {
 }
 
 
-
 vim.cmd("set scrolloff=5 rnu")
 
 return M
