@@ -1,4 +1,6 @@
 [alias]
-	st = status
+  st = status
   co = checkout
   ac = !sh -c \"git add . && git commit\"
+  l = git log --color
+  rtb = git switch -
