@@ -9,10 +9,10 @@ map("i", "jk", "<ESC>")
 
 map("n", "<leader>fj", ":CellularAutomaton make_it_rain<CR>", { desc = "make it rain" })
 map("n", "<leader>ut", ":UndotreeToggle<CR>:UndotreeFocus<CR>", { desc = "toggle undo tree" })
-map("n", "<C-h>", ":TmuxNavigateLeft<CR>")
-map("n", "<C-j>", ":TmuxNavigateDown<CR>")
-map("n", "<C-k>", ":TmuxNavigateUp<CR>")
-map("n", "<C-l>", ":TmuxNavigateRight<CR>")
+map("n", "<C-h>", ":TmuxNavigateLeft<CR>", { silent = true })
+map("n", "<C-j>", ":TmuxNavigateDown<CR>", { silent = true })
+map("n", "<C-k>", ":TmuxNavigateUp<CR>", { silent = true })
+map("n", "<C-l>", ":TmuxNavigateRight<CR>", { silent = true })
 map("n", "ca", ":lua vim.lsp.buf.code_action()<CR>", { desc = "show code actions" })
 map("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { desc = "go to definition" })
 map("n", "<leader>ra", ":lua vim.lsp.buf.rename()<CR>", { desc = "rename" })
@@ -29,32 +29,50 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv")
 -- splits
 map("n", "<leader>sn", ":split<CR>", { desc = "Creates a horizontal split" })
 map("n", "<leader>sv", ":vsplit<CR>", { desc = "Creates a vertical split" })
-map("n", "<C-M-j>", ":resize -5<CR>")
-map("n", "<C-M-k>", ":resize +5<CR>")
-map("n", "<C-M-l>", ":vertical resize -5<CR>")
-map("n", "<C-M-h>", ":vertical resize +5<CR>")
+-- map("n", "<C-M-j>", ":resize -5<CR>")
+-- map("n", "<C-M-k>", ":resize +5<CR>")
+-- map("n", "<C-M-l>", ":vertical resize -5<CR>")
+-- map("n", "<C-M-h>", ":vertical resize +5<CR>")
 
--- vim.keymap.set("n", "<C-h>", function()
+local ss = require("smart-splits")
+
+map('n', '<C-M-h>', ss.resize_left)
+map('n', '<C-M-j>', ss.resize_down)
+map('n', '<C-M-k>', ss.resize_up)
+map('n', '<C-M-l>', ss.resize_right)
+-- moving between splits
+-- map('n', '<C-h>', ss.move_cursor_left)
+-- map('n', '<C-j>', ss.move_cursor_down)
+-- map('n', '<C-k>', ss.move_cursor_up)
+-- map('n', '<C-l>', ss.move_cursor_right)
+-- map('n', '<C-\\>', ss.move_cursor_previous)
+-- swapping buffers between windows
+map('n', '<leader><leader>h', ss.swap_buf_left)
+map('n', '<leader><leader>j', ss.swap_buf_down)
+map('n', '<leader><leader>k', ss.swap_buf_up)
+map('n', '<leader><leader>l', ss.swap_buf_right)
+
+-- map("n", "<C-h>", function()
 --   if vim.fn.winnr() == vim.fn.winnr('h') then
 --     vim.cmd("vertical resize -2")
 --   end
 -- end, { silent = true })
 --
--- vim.keymap.set("n", "<C-j>", function() 
+-- map("n", "<C-j>", function()
 --   if vim.fn.winnr() == vim.fn.winnr('j') then
 --     vim.cmd("resize +2")
 --   end
 -- end, { silent = true })
 --
--- vim.keymap.set("n", "<C-k>", function()
+-- map("n", "<C-k>", function()
 --   if vim.fn.winnr() == vim.fn.winnr('k') then
 --     vim.cmd("resize -2")
 --   end
 -- end, { silent = true })
 --
--- vim.keymap.set("n", "<C-l>", function()
+-- map("n", "<C-l>", function()
 --   if vim.fn.winnr() == vim.fn.winnr('l') then
---     vim.cmd("vertical resize +2") 
+--     vim.cmd("vertical resize +2")
 --   end
 -- end, { silent = true })
 
