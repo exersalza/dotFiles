@@ -6,6 +6,8 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("n", "j", "gj", { silent = true })
+map("n", "k", "gk", { silent = true })
 
 map("n", "<leader>fj", ":CellularAutomaton make_it_rain<CR>", { desc = "make it rain" })
 map("n", "<leader>ut", ":UndotreeToggle<CR>:UndotreeFocus<CR>", { desc = "toggle undo tree" })
@@ -18,11 +20,13 @@ map("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { desc = "go to definition" 
 map("n", "<leader>ra", ":lua vim.lsp.buf.rename()<CR>", { desc = "rename" })
 map("n", "<Tab>", "")
 map("n", "<leader>n", "")
+map("n", "<leader>fc", ":Telescope resume<CR>", { desc = "resumes last telescope window" })
 
 
 -- Move lines with alt <direction>
 map("n", "<A-j>", ":m +1<CR>")
 map("n", "<A-k>", ":m -2<CR>")
+-- move lines in visual mode, works with multiline select
 map("v", "<A-j>", ":m '>+1<CR>gv=gv")
 map("v", "<A-k>", ":m '<-2<CR>gv=gv")
 

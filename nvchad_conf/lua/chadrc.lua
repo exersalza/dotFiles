@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-  theme = "oxocarbon",
+  theme = "tokyodark",
   tabufline = {
     enabled= false
   },
@@ -13,5 +13,7 @@ M.ui = {
 
 
 vim.cmd("set scrolloff=5 rnu")
+vim.opt.langmenu = "en_US"
+vim.cmd("language en_US")
 
 return M

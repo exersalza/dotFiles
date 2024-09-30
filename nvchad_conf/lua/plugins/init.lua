@@ -3,6 +3,38 @@ return {
   "nvim-lua/plenary.nvim",
   "nvim-tree/nvim-web-devicons",
   {
+    'glepnir/template.nvim',
+    cmd = { 'Template', 'TemProject' },
+    config = function()
+      require('template').setup({
+        -- config in there
+        author = "Julian J.",
+      })
+    end
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  { "Bilal2453/luvit-meta",            lazy = true }, -- optional `vim.uv` typings
+  {                                                   -- optional completion source for require statements and module annotations
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
+  },
+  {
     "folke/todo-comments.nvim",
     lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -11,6 +43,13 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     }
+  },
+  {
+    "declancm/cinnamon.nvim",
+    version = "*", -- use latest release
+    opts = {
+      -- change default options here
+    },
   },
   {
     "folke/trouble.nvim",
@@ -178,6 +217,7 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
     config = function()
       require("configs.telescope-ui-select")
+      require("configs.telescope")
       global = "fjdsk"
     end
   },
