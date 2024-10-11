@@ -6,16 +6,107 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("n", "j", "gj", { silent = true })
+map("n", "k", "gk", { silent = true })
 
-map("n", "<leader>fj", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "make it rain" })
-map("n", "<leader>ut", "<cmd>UndotreeToggle<CR><cmd>UndotreeFocus<CR>", { desc = "toggle undo tree" })
-map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
-map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>")
-map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>")
-map("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>")
-map("n", "ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "show code actions" })
-map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "go to definition" })
-map("n", "<leader>ra", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "rename" })
+map("n", "<leader>fj", ":CellularAutomaton make_it_rain<CR>", { desc = "make it rain" })
+map("n", "<leader>ut", ":UndotreeToggle<CR>:UndotreeFocus<CR>", { desc = "toggle undo tree" })
+map("n", "<C-h>", ":TmuxNavigateLeft<CR>", { silent = true })
+map("n", "<C-j>", ":TmuxNavigateDown<CR>", { silent = true })
+map("n", "<C-k>", ":TmuxNavigateUp<CR>", { silent = true })
+map("n", "<C-l>", ":TmuxNavigateRight<CR>", { silent = true })
+map("n", "ca", ":lua vim.lsp.buf.code_action()<CR>", { desc = "show code actions" })
+map("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { desc = "go to definition" })
+map("n", "<leader>ra", ":lua vim.lsp.buf.rename()<CR>", { desc = "rename" })
+map("n", "<Tab>", "")
+map("n", "gb", "''")
+map("n", "<leader>n", "")
+map("n", "<leader>fc", ":Telescope resume<CR>", { desc = "resumes last telescope window" })
 
-map({ "v", "n" }, "<A-j>", "<cmd>m +1<CR>")
-map({ "v", "n" }, "<A-k>", "<cmd>m -2<CR>")
+map("n", "<leader>gc", ":GitMessenger<CR>", {desc = "opens the commit responsible for the line under the cursor"})
+
+
+-- Move lines with alt <direction>
+map("n", "<A-j>", ":m +1<CR>")
+map("n", "<A-k>", ":m -2<CR>")
+-- move lines in visual mode, works with multiline select
+map("v", "<A-j>", ":m '>+1<CR>gv=gv")
+map("v", "<A-k>", ":m '<-2<CR>gv=gv")
+
+-- splits
+map("n", "<leader>sn", ":split<CR>", { desc = "Creates a horizontal split" })
+map("n", "<leader>sv", ":vsplit<CR>", { desc = "Creates a vertical split" })
+-- map("n", "<C-M-j>", ":resize -5<CR>")
+-- map("n", "<C-M-k>", ":resize +5<CR>")
+-- map("n", "<C-M-l>", ":vertical resize -5<CR>")
+-- map("n", "<C-M-h>", ":vertical resize +5<CR>")
+
+local ss = require("smart-splits")
+
+map('n', '<C-M-h>', ss.resize_left)
+map('n', '<C-M-j>', ss.resize_down)
+map('n', '<C-M-k>', ss.resize_up)
+map('n', '<C-M-l>', ss.resize_right)
+-- moving between splits
+-- map('n', '<C-h>', ss.move_cursor_left)
+-- map('n', '<C-j>', ss.move_cursor_down)
+-- map('n', '<C-k>', ss.move_cursor_up)
+-- map('n', '<C-l>', ss.move_cursor_right)
+-- map('n', '<C-\\>', ss.move_cursor_previous)
+-- swapping buffers between windows
+map('n', '<leader><leader>h', ss.swap_buf_left)
+map('n', '<leader><leader>j', ss.swap_buf_down)
+map('n', '<leader><leader>k', ss.swap_buf_up)
+map('n', '<leader><leader>l', ss.swap_buf_right)
+
+-- map("n", "<C-h>", function()
+--   if vim.fn.winnr() == vim.fn.winnr('h') then
+--     vim.cmd("vertical resize -2")
+--   end
+-- end, { silent = true })
+--
+-- map("n", "<C-j>", function()
+--   if vim.fn.winnr() == vim.fn.winnr('j') then
+--     vim.cmd("resize +2")
+--   end
+-- end, { silent = true })
+--
+-- map("n", "<C-k>", function()
+--   if vim.fn.winnr() == vim.fn.winnr('k') then
+--     vim.cmd("resize -2")
+--   end
+-- end, { silent = true })
+--
+-- map("n", "<C-l>", function()
+--   if vim.fn.winnr() == vim.fn.winnr('l') then
+--     vim.cmd("vertical resize +2")
+--   end
+-- end, { silent = true })
+
+-- tests
+--
+local nt = require("neotest")
+
+map("n", "<leader>no", function()
+  nt.summary.open()
+end, { desc = "Opens the Summary panel from Neotest" })
+
+map("n", "<leader>nc", function()
+  nt.summary.close()
+end, { desc = "Closes the Summary panel from Neotest" })
+
+map("n", "<leader>nr", function()
+  nt.run.run()
+end, { desc = "Runs test from current Project" })
+
+map("n", "<leader>nf", function()
+  nt.run.run(vim.fn.expand("%"))
+end, { desc = "Runs test from current File" })
+
+map("n", "<leader>na", function()
+  nt.run.attach()
+end, { desc = "Attaches to nearest test" })
+
+map("n", "<leader>nt", function()
+  nt.output_panel.toggle()
+end, { desc = "Enter output" })

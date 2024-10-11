@@ -1,11 +1,19 @@
+-- This file  needs to have same structure as nvconfig.lua
+-- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvconfig.lua
+
 ---@type ChadrcConfig
 local M = {}
 
-vim.cmd("set rnu")
+M.ui = {
+  theme = "tokyodark",
+  tabufline = {
+    enabled= false
+  },
+}
 
-M.ui = { theme = 'bearded-arc' }
-M.plugins = 'plugins'
-M.mappings = require('mappings')
 
-vim.cmd("set scrolloff=5")
+vim.cmd("set scrolloff=5 rnu")
+vim.opt.langmenu = "en_US"
+vim.cmd("language en_US")
+
 return M
