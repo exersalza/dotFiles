@@ -2,6 +2,7 @@ return {
   "glepnir/lspsaga.nvim",
   "nvim-lua/plenary.nvim",
   "nvim-tree/nvim-web-devicons",
+  "hiphish/rainbow-delimiters.nvim",
   {"rhysd/git-messenger.vim", lazy = false},
   {"nvim-telescope/telescope-ui-select.nvim", lazy = false},
   {

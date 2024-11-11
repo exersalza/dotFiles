@@ -8,6 +8,8 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "j", "gj", { silent = true })
 map("n", "k", "gk", { silent = true })
+map("n", "<S-j>", "5gj", { silent = true })
+-- map("n", "<S-k>", "5gk", { silent = true })
 
 map("n", "<leader>fj", ":CellularAutomaton make_it_rain<CR>", { desc = "make it rain" })
 map("n", "<leader>ut", ":UndotreeToggle<CR>:UndotreeFocus<CR>", { desc = "toggle undo tree" })

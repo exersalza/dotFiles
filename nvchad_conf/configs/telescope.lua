@@ -1,6 +1,14 @@
 local telescope = require('telescope.builtin')
 local telescope_state = require('telescope.state')
 
+require("telescope").setup {
+  pickers = {
+    find_files = {
+      hidden =false 
+    }
+  }
+}
+
 local last_search = nil
 
 local function search_with_cache()
