@@ -21,10 +21,3 @@ lspconfig.ts_ls.setup {
   on_init = on_init,
   capabilities = capabilities,
 }
-
-lspconfig.arduino_language_server.setup({
-  cmd = {
-    "arduino-language-server",
-    "-cli-config", "C:\\Users\\ui56181\\AppData\\Local\\Arduino15\\arduino-cli.yaml",
-  }
-})
