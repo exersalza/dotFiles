@@ -4,6 +4,8 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+vim.keymap.del("n", "<S-Tab>")
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "j", "gj", { silent = true })
@@ -12,7 +14,7 @@ map("n", "<S-j>", "5gj", { silent = true })
 -- map("n", "<S-k>", "5gk", { silent = true })
 
 map("n", "<leader>fj", ":CellularAutomaton make_it_rain<CR>", { desc = "make it rain" })
-map("n", "<leader>ut", ":UndotreeToggle<CR>:UndotreeFocus<CR>", { desc = "toggle undo tree" })
+-- map("n", "<leader>ut", ":UndotreeToggle<CR>:UndotreeFocus<CR>", { desc = "toggle undo tree" })
 map("n", "<C-h>", ":TmuxNavigateLeft<CR>", { silent = true })
 map("n", "<C-j>", ":TmuxNavigateDown<CR>", { silent = true })
 map("n", "<C-k>", ":TmuxNavigateUp<CR>", { silent = true })
@@ -112,3 +114,13 @@ end, { desc = "Attaches to nearest test" })
 map("n", "<leader>nt", function()
   nt.output_panel.toggle()
 end, { desc = "Enter output" })
+
+
+-- codedocs
+map( "n", "<leader>k", require('codedocs').insert_docs, { desc = "Inserts a docstring into the buffer" } )
+
+-- map("n", "<leader>fF" , function() require("telescope.builtin").find_files({hidden = true}) end, {desc = "open file picker with hidden files"})
+-- map("n", "<leader>ff" , function() require("telescope.builtin").find_files({hidden = false, }) end, {desc = "open file picker without hidden files"})
+
+map("n", "<leader>tp", require("telescope.builtin").oldfiles, {desc = "open files opened before"})
+map("n", "<leader>tt", require("telescope.builtin").treesitter, {desc = "find all symbols in current file"})

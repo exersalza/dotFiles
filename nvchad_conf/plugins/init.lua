@@ -1,14 +1,20 @@
 return {
-  "glepnir/lspsaga.nvim",
-  "nvim-lua/plenary.nvim",
-  "nvim-tree/nvim-web-devicons",
-  "hiphish/rainbow-delimiters.nvim",
-  {"rhysd/git-messenger.vim", lazy = false},
-  {"nvim-telescope/telescope-ui-select.nvim", lazy = false},
+  {
+    "prettier/vim-prettier", lazy = false
+  },
+{
+    'LhKipp/nvim-nu',
+    opts = {}
+},
   {
     "MunifTanjim/prettier.nvim",
+    lazy = false,
+    dependencies = {
+      "jose-elias-alvarez/null-ls.nvim",
+      "neovim/nvim-lspconfig",
+    },
     setup = {
-      bin = 'prettier', -- or `prettierd`
+      bin = 'prettierd', -- or `prettierd`
       filetypes = {
         "css",
         "graphql",
@@ -25,14 +31,35 @@ return {
     }
   },
   {
-    'glepnir/template.nvim',
-    cmd = { 'Template', 'TemProject' },
+    "stevearc/conform.nvim",
+    event = 'BufWritePre', -- uncomment for format on save
+    config = function() require "configs.conform" end,
+  },
+
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>ut", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
+  -- These are some examples, uncomment them if you want to see them work!
+  {
+    "neovim/nvim-lspconfig",
     config = function()
-      require('template').setup({
-        -- config in there
-        author = "Julian J.",
-        temp_dir = "~/development/code_templates/"
-      })
+      require "configs.lspconfig"
+    end,
+  },
+  "glepnir/lspsaga.nvim",
+  "nvim-lua/plenary.nvim",
+  "nvim-tree/nvim-web-devicons",
+  "jeangiraldoo/codedocs.nvim",
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+    init = function()
+      vim.g.rustfmt_autosave = 1
     end
   },
   {
@@ -74,93 +101,24 @@ return {
       -- change default options here
     },
   },
-  {
-    "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
-    cmd = "Trouble",
-    keys = {
-      {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
-        "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
-      },
-      {
-        "<leader>cl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
-      },
-      {
-        "<leader>xL",
-        "<cmd>Trouble loclist toggle<cr>",
-        desc = "Location List (Trouble)",
-      },
-      {
-        "<leader>xQ",
-        "<cmd>Trouble qflist toggle<cr>",
-        desc = "Quickfix List (Trouble)",
-      },
-    },
-  },
+
   {
     "mrjones2014/smart-splits.nvim"
   },
   {
-    "stevearc/conform.nvim",
-    opts = function(_, opts)
-      opts.formatters_by_ft = opts.formatters_by_ft or {}
-      opts.formatters_by_ft.typescriptreact = { "prettierd", "prettier" }
-      opts.formatters_by_ft.javascriptreact = { "prettierd", "prettier" }
-    end,
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false,   -- This plugin is already lazy
   },
-  {
-    "stevearc/vim-arduino",
-    keys = {
-      { "<leader>ac", "<cmd>ArduinoCompile<cr>",       desc = "Compile Sketch" },
-      { "<leader>ad", "<cmd>ArduinoCompileDeploy<cr>", desc = "Compile and Deploy Sketch" },
-      { "<leader>as", "<cmd>ArduinoSerial<cr>",        desc = "Open Serial Monitor" },
-    },
-  },
-
-  -- Arduino language server
-  -- {
-  --   "glebzlat/arduino-nvim",
-  --   config = function()
-  --     require("arduino-nvim").setup()
-  --   end,
-  --   ft = "arduino",
-  -- },
-  {
-    "arduino/arduino-language-server",
-    ft = "arduino",
-    config = function()
-      local lspconfig = require("lspconfig")
-      lspconfig.arduino_language_server.setup({
-        cmd = {
-          "arduino-language-server",
-          "-cli-config", [[ C:\Users\uie56181\AppData\Local\Arduino15/arduino-cli.yaml ]],
-          -- "-cli", [[ C:\Users\uie56181\Desktop\arduino\resources\app\lib\backend\resources\arduino-cli.exe ]],
-          -- "-clangd", "clangd",
-          -- "-fqbn", "esp8266:8266:nodemcuv2",
-        },
-      })
-    end,
-  },
-  {
-    "nvchad/nvterm",
-    config = function()
-      require("nvterm").setup()
-    end
-  },
+  { "mbbill/undotree",                 lazy = true },
+  { "tpope/vim-surround",              lazy = false },
+  { "wakatime/vim-wakatime",           lazy = false },
+  { "christoomey/vim-tmux-navigator",  lazy = false },
+  { "mattn/emmet-vim",                 lazy = false },
+  { "windwp/nvim-ts-autotag",          lazy = false },
+  { "folke/zen-mode.nvim",             lazy = false },
+  { "maxmellon/vim-jsx-pretty",        lazy = false },
+  { "Eandrju/cellular-automaton.nvim", lazy = false },
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -174,7 +132,7 @@ return {
     config = function()
       require("neotest").setup({
         adapters = {
-          require('rustaceanvim.neotest');
+          require('rustaceanvim.neotest'),
           require("neotest-python")({
             -- Adapter configuration options
             runner = "pytest",
@@ -187,114 +145,14 @@ return {
       })
     end,
   },
-  { "mbbill/undotree",                 lazy = true },
-  { "tpope/vim-surround",              lazy = false },
-  { "wakatime/vim-wakatime",           lazy = false },
-  { "christoomey/vim-tmux-navigator",  lazy = false },
-  { "mattn/emmet-vim",                 lazy = false },
-  { "windwp/nvim-ts-autotag",          lazy = false },
-  { "folke/zen-mode.nvim",             lazy = false },
-  { "maxmellon/vim-jsx-pretty",        lazy = false },
-  { "Eandrju/cellular-automaton.nvim", lazy = false },
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreview", "MarkdownPreviewStop" },
+    "MeanderingProgrammer/render-markdown.nvim",
     lazy = false,
-    build = function() vim.fn["mkdp#util#install"]() end,
-    init = function() vim.g.mkdp_theme = "dark" end
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-    }
-  },
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("configs.lspconfig")
-      require 'lspconfig'.pyright.setup {}
-      require 'lspconfig'.lua_ls.setup {}
-    end
-  },
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end
-  },
-  {
-    'mrcjkb/rustaceanvim',
-    version = '^5', -- Recommended
-    lazy = false, -- This plugin is already lazy
-  },
-  {
-    "nvim-telescope/telescope-ui-select.nvim",
-    config = function()
-      require("configs.telescope-ui-select")
-      require("configs.telescope")
-      global = "fjdsk"
-    end
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css", "rust", "arduino"
-      },
-    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
   }
 }
-
-
-
--- return {
---   { "tpope/vim-surround", lazy = false },
---   { "wakatime/vim-wakatime", lazy = false },
---   {
---     "rust-lang/rust.vim",
---     ft = "rust",
---     init = function()
---       vim.g.rustfmt_autosave = 1
---     end
---   },
---   {
---     "simrat39/rust-tools.nvim",
---     ft = "rust",
---     dependencies = "neovim/nvim-lspconfig",
---     opts = function ()
---       return require "configs.rust-tools"
---     end,
---     config = function (_, opts)
---       require("rust-tools").setup(opts)
---     end
---   },
---   {
---     "stevearc/conform.nvim",
---     -- event = 'BufWritePre', -- uncomment for format on save
---     config = function()
---       require "configs.conform"
---     end,
---   },
---
---   -- These are some examples, uncomment them if you want to see them work!
---   {
---     "neovim/nvim-lspconfig",
---     config = function()
---       require("nvchad.configs.lspconfig").defaults()
---       require "configs.lspconfig"
---     end,
---   },
---   --
---   {
---     "williamboman/mason.nvim",
---     opts = {
---       ensure_installed = {
---         "lua-language-server", "stylua",
---         "html-lsp", "css-lsp", "prettier", "rust-analyzer"
---       },
---     },
---   },
---
--- }
