@@ -124,3 +124,21 @@ map( "n", "<leader>k", require('codedocs').insert_docs, { desc = "Inserts a docs
 
 map("n", "<leader>tp", require("telescope.builtin").oldfiles, {desc = "open files opened before"})
 map("n", "<leader>tt", require("telescope.builtin").treesitter, {desc = "find all symbols in current file"})
+
+
+-- twitch mappings
+map("n", "<leader>tf", ":twitch event trigger follower --transport=websocket<CR>", {desc = "[twitch cli] trigger follower event"})
+map("n", "<leader>ts", ":twitch event trigger subscribe --transport=websocket<CR>", {desc = "[twitch cli] trigger sub event"})
+map("n", "<leader>tb", ":twitch event trigger cheer --transport=websocket<CR>", {desc = "[twitch cli] trigger bits event"})
+
+map("n", "<leader>tr", ":twitch event websocket reconnect --transport=websocket<CR>", {desc = "[twitch cli] trigger sub event"})
+
+-- rust mappings
+map("n", "<leader>cc", ":!cargo run<CR>", {desc = "build and run current rust project"})
+map("n", "<leader>cb", ":!cargo build<CR>", {desc = "build current rust project"})
+map("n", "<leader>cr", ":!cargo build -r<CR>", {desc = "build current rust project for release"})
+map("n", "<leader>ct", ":!cargo test<CR>", {desc = "build and test current rust project"})
+
+
+-- Smadge
+map("n", "q", function() end)
