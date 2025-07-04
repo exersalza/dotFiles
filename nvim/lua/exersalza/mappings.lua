@@ -18,13 +18,16 @@ map("n", "<C-l>", ":TmuxNavigateRight<CR>", { silent = true })
 map("n", "ca", ":lua vim.lsp.buf.code_action()<CR>", { desc = "show code actions" })
 map("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { desc = "go to definition" })
 map("n", "<leader>ra", ":lua vim.lsp.buf.rename()<CR>", { desc = "rename" })
-map("n", "<leader>lr", ":Telescope lsp_references<CR>", { desc = "show references below cursor"})
+map("n", "<leader>lr", ":Telescope lsp_references<CR>", { desc = "show references below cursor" })
 map("n", "<Tab>", "")
 map("n", "gb", "''")
 map("n", "<leader>n", "")
 map("n", "<leader>fc", ":Telescope resume<CR>", { desc = "resumes last telescope window" })
 
-map("n", "<leader>gc", ":GitMessenger<CR>", {desc = "opens the commit responsible for the line under the cursor"})
+map("n", "<leader>gc", ":GitMessenger<CR>", { desc = "opens the commit responsible for the line under the cursor" })
+
+
+map("n", "<Esc>", ":noh<CR>")
 
 
 -- Move lines with alt <direction>
@@ -95,52 +98,56 @@ map('n', '<leader><leader>l', ss.swap_buf_right)
 local nt = require("neotest")
 
 map("n", "<leader>no", function()
-  nt.summary.open()
+    nt.summary.open()
 end, { desc = "Opens the Summary panel from Neotest" })
 
 map("n", "<leader>nc", function()
-  nt.summary.close()
+    nt.summary.close()
 end, { desc = "Closes the Summary panel from Neotest" })
 
 map("n", "<leader>nr", function()
-  nt.run.run()
+    nt.run.run()
 end, { desc = "Runs test from current Project" })
 
 map("n", "<leader>nf", function()
-  nt.run.run(vim.fn.expand("%"))
+    nt.run.run(vim.fn.expand("%"))
 end, { desc = "Runs test from current File" })
 
 map("n", "<leader>na", function()
-  nt.run.attach()
+    nt.run.attach()
 end, { desc = "Attaches to nearest test" })
 
 map("n", "<leader>nt", function()
-  nt.output_panel.toggle()
+    nt.output_panel.toggle()
 end, { desc = "Enter output" })
 
 
 -- codedocs
-map( "n", "<leader>k", require('codedocs').insert_docs, { desc = "Inserts a docstring into the buffer" } )
+map("n", "<leader>k", require('codedocs').insert_docs, { desc = "Inserts a docstring into the buffer" })
 
 -- map("n", "<leader>fF" , function() require("telescope.builtin").find_files({hidden = true}) end, {desc = "open file picker with hidden files"})
 -- map("n", "<leader>ff" , function() require("telescope.builtin").find_files({hidden = false, }) end, {desc = "open file picker without hidden files"})
 
-map("n", "<leader>tp", require("telescope.builtin").oldfiles, {desc = "open files opened before"})
-map("n", "<leader>tt", require("telescope.builtin").treesitter, {desc = "find all symbols in current file"})
+map("n", "<leader>tp", require("telescope.builtin").oldfiles, { desc = "open files opened before" })
+map("n", "<leader>tt", require("telescope.builtin").treesitter, { desc = "find all symbols in current file" })
 
 
 -- twitch mappings
-map("n", "<leader>tf", ":twitch event trigger follower --transport=websocket<CR>", {desc = "[twitch cli] trigger follower event"})
-map("n", "<leader>ts", ":twitch event trigger subscribe --transport=websocket<CR>", {desc = "[twitch cli] trigger sub event"})
-map("n", "<leader>tb", ":twitch event trigger cheer --transport=websocket<CR>", {desc = "[twitch cli] trigger bits event"})
+map("n", "<leader>tf", ":twitch event trigger follower --transport=websocket<CR>",
+    { desc = "[twitch cli] trigger follower event" })
+map("n", "<leader>ts", ":twitch event trigger subscribe --transport=websocket<CR>",
+    { desc = "[twitch cli] trigger sub event" })
+map("n", "<leader>tb", ":twitch event trigger cheer --transport=websocket<CR>",
+    { desc = "[twitch cli] trigger bits event" })
 
-map("n", "<leader>tr", ":twitch event websocket reconnect --transport=websocket<CR>", {desc = "[twitch cli] trigger sub event"})
+map("n", "<leader>tr", ":twitch event websocket reconnect --transport=websocket<CR>",
+    { desc = "[twitch cli] trigger sub event" })
 
 -- rust mappings
-map("n", "<leader>cc", ":!cargo run<CR>", {desc = "build and run current rust project"})
-map("n", "<leader>cb", ":!cargo build<CR>", {desc = "build current rust project"})
-map("n", "<leader>cr", ":!cargo build -r<CR>", {desc = "build current rust project for release"})
-map("n", "<leader>ct", ":!cargo test<CR>", {desc = "build and test current rust project"})
+map("n", "<leader>cc", ":!cargo run<CR>", { desc = "build and run current rust project" })
+map("n", "<leader>cb", ":!cargo build<CR>", { desc = "build current rust project" })
+map("n", "<leader>cr", ":!cargo build -r<CR>", { desc = "build current rust project for release" })
+map("n", "<leader>ct", ":!cargo test<CR>", { desc = "build and test current rust project" })
 
 
 -- Smadge
@@ -154,3 +161,21 @@ map("n", "<A-u>", "5k")
 map("n", "<A-d>", "5j")
 map("v", "<A-u>", "5k")
 map("v", "<A-d>", "5j")
+
+
+
+-- formatting
+map("n", "<leader>fm", function()
+    vim.lsp.buf.format()
+end)
+
+
+vim.keymap.set("n", "K", "<cmd>LspUI hover<CR>")
+vim.keymap.set("n", "gr", "<cmd>LspUI reference<CR>")
+vim.keymap.set("n", "gd", "<cmd>LspUI definition<CR>")
+vim.keymap.set("n", "gt", "<cmd>LspUI type_definition<CR>")
+vim.keymap.set("n", "gi", "<cmd>LspUI implementation<CR>")
+vim.keymap.set("n", "<leader>rn", "<cmd>LspUI rename<CR>")
+vim.keymap.set("n", "<leader>ca", "<cmd>LspUI code_action<CR>")
+vim.keymap.set("n", "<leader>ci", "<cmd>LspUI call_hierarchy incoming_calls<CR>")
+vim.keymap.set("n", "<leader>co", "<cmd>LspUI call_hierarchy outgoing_calls<CR>")

@@ -45,6 +45,13 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
+                "pyright",        -- Python
+                "ts_ls",       -- TypeScript/JavaScript
+                "clangd",         -- C/C++
+                "html",           -- HTML
+                "cssls",          -- CSS
+                "jsonls",         -- JSON
+                "bashls",         -- Bash
             },
             handlers = {
                 function(server_name) -- default handler (optional)

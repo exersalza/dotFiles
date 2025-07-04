@@ -8,14 +8,30 @@ return {
     },
 
     config = function()
-        require('telescope').setup({})
+        require('telescope').setup({
+            defaults = {
+                file_ignore_patterns = {
+                    "%.lock$",
+                    "package%-lock%.json",
+                },
+                vimgrep_arguments = {
+                  'rg',
+                  '--color=never',
+                  '--no-heading',
+                  '--with-filename',
+                  '--line-number',
+                  '--column',
+                  '--smart-case',
+                }
+            }
+        })
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
         vim.keymap.set('n', '<C-p>', builtin.git_files, {})
         vim.keymap.set('n', '<leader>fw', function()
             local word = vim.fn.expand("<cword>")
-            builtin.grep_string({ search = word })
+            builtin.live_grep({ search = word, hidden = false, no_ignore = false })
         end)
         vim.keymap.set('n', '<leader>pWs', function()
             local word = vim.fn.expand("<cWORD>")
@@ -27,4 +43,3 @@ return {
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
     end
 }
-
