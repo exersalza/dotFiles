@@ -1,6 +1,7 @@
 require("exersalza.lazy")
 require("exersalza.mappings")
 require("exersalza.set")
+require("exersalza.autocmds")
 
 
 require("lualine").setup({})

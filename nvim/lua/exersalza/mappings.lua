@@ -170,12 +170,29 @@ map("n", "<leader>fm", function()
 end)
 
 
-vim.keymap.set("n", "K", "<cmd>LspUI hover<CR>")
-vim.keymap.set("n", "gr", "<cmd>LspUI reference<CR>")
-vim.keymap.set("n", "gd", "<cmd>LspUI definition<CR>")
-vim.keymap.set("n", "gt", "<cmd>LspUI type_definition<CR>")
-vim.keymap.set("n", "gi", "<cmd>LspUI implementation<CR>")
-vim.keymap.set("n", "<leader>rn", "<cmd>LspUI rename<CR>")
-vim.keymap.set("n", "<leader>ca", "<cmd>LspUI code_action<CR>")
-vim.keymap.set("n", "<leader>ci", "<cmd>LspUI call_hierarchy incoming_calls<CR>")
-vim.keymap.set("n", "<leader>co", "<cmd>LspUI call_hierarchy outgoing_calls<CR>")
+map("n", "K", "<cmd>LspUI hover<CR>")
+map("n", "gr", "<cmd>LspUI reference<CR>")
+map("n", "gd", "<cmd>LspUI definition<CR>")
+map("n", "gt", "<cmd>LspUI type_definition<CR>")
+map("n", "gi", "<cmd>LspUI implementation<CR>")
+map("n", "<leader>rn", "<cmd>LspUI rename<CR>")
+map("n", "<leader>ca", "<cmd>LspUI code_action<CR>")
+map("n", "<leader>ci", "<cmd>LspUI call_hierarchy incoming_calls<CR>")
+map("n", "<leader>co", "<cmd>LspUI call_hierarchy outgoing_calls<CR>")
+
+
+
+map("t", "<C-x>", "<C-\\><C-n>", { noremap = true, silent = true })
+
+map("n", "<leader>v", function()
+    local c = vim.cmd
+
+    c("vsplit")
+    c("wincmd l")
+    c("vertical resize 80")
+
+    vim.defer_fn(function()
+        c("terminal nu")
+    end, 10)
+
+end, {silent = false, noremap = true})

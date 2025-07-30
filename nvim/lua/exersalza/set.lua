@@ -26,3 +26,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+-- Plugins 
+vim.g._ts_force_sync_parsing = true
