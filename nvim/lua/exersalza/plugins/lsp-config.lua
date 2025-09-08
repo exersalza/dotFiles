@@ -1,14 +1,12 @@
-
-
 local root_files = {
-  '.luarc.json',
-  '.luarc.jsonc',
-  '.luacheckrc',
-  '.stylua.toml',
-  'stylua.toml',
-  'selene.toml',
-  'selene.yml',
-  '.git',
+    '.luarc.json',
+    '.luarc.jsonc',
+    '.luacheckrc',
+    '.stylua.toml',
+    'stylua.toml',
+    'selene.toml',
+    'selene.yml',
+    '.git',
 }
 
 
@@ -16,6 +14,7 @@ local py_root_files = {
     '.git',
     'pyproject.toml',
     'req',
+    'venv'
 }
 
 return {
@@ -55,13 +54,13 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
-                "basedpyright",        -- Python
-                "ts_ls",       -- TypeScript/JavaScript
-                "clangd",         -- C/C++
-                "html",           -- HTML
-                "cssls",          -- CSS
-                "jsonls",         -- JSON
-                "bashls",         -- Bash
+                "basedpyright", -- Python
+                "ts_ls",        -- TypeScript/JavaScript
+                "clangd",       -- C/C++
+                "html",         -- HTML
+                "cssls",        -- CSS
+                "jsonls",       -- JSON
+                "bashls",       -- Bash
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -92,16 +91,16 @@ return {
                         capabilities = capabilities,
                         root_dir = function(fname)
                             local root = util.root_pattern(
-                              'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
-                              'Pipfile', 'pyrightconfig.json', '.git'
+                                'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
+                                'Pipfile', 'pyrightconfig.json', '.git', 'venv'
                             )(fname)
                             if root then
-                              print("Detected LSP root:", root)
-                              return root
+                                print("Detected LSP root:", root)
+                                return root
                             else
-                              local cwd = vim.loop.cwd()
-                              print("Using current working dir as root:", cwd)
-                              return cwd
+                                local cwd = vim.fn.getcwd()
+                                print("Using current working dir as root:", cwd)
+                                return cwd
                             end
                         end
                     })

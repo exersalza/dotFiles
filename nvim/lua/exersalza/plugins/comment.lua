@@ -3,7 +3,11 @@ return {
     opts = {
         -- add any options here
         toggler = {
-            line = "<leader>/"
+            line = "<leader>/",
+        },
+        opleader = {
+            line = "<leader>/",
+            block = "<leader>/",
         }
     }
 }
