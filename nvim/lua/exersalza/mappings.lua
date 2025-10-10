@@ -1,5 +1,8 @@
 local map = vim.keymap.set
 
+local curl = require("curl")
+curl.setup({})
+
 --vim.keymap.del("n", "<S-Tab>")
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -176,23 +179,29 @@ map("n", "gd", "<cmd>LspUI definition<CR>")
 map("n", "gt", "<cmd>LspUI type_definition<CR>")
 map("n", "gi", "<cmd>LspUI implementation<CR>")
 map("n", "<leader>rn", "<cmd>LspUI rename<CR>")
-map("n", "<leader>ca", "<cmd>LspUI code_action<CR>")
+map("n", "<leader>ca", function() vim.lsp.buf.code_action() end)
 map("n", "<leader>ci", "<cmd>LspUI call_hierarchy incoming_calls<CR>")
 map("n", "<leader>co", "<cmd>LspUI call_hierarchy outgoing_calls<CR>")
 
 
-
 map("t", "<C-x>", "<C-\\><C-n>", { noremap = true, silent = true })
 
-map("n", "<leader>v", function()
-    local c = vim.cmd
+map("n", "<leader>u", function()
+    vim.cmd.UndotreeToggle()
+    vim.cmd.UndotreeFocus()
+end)
 
-    c("vsplit")
-    c("wincmd l")
-    c("vertical resize 80")
 
-    vim.defer_fn(function()
-        c("terminal nu")
-    end, 10)
+local curl_tog = false
 
-end, {silent = false, noremap = true})
+-- CURLING
+map("n", "<leader>ck", function()
+    if curl_tog then
+        curl.close_curl_tab()
+        curl_tog = false
+        return
+    end
+
+    curl.open_curl_tab()
+    curl_tog = true
+end, { silent = true })

@@ -92,7 +92,7 @@ return {
                         root_dir = function(fname)
                             local root = util.root_pattern(
                                 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt',
-                                'Pipfile', 'pyrightconfig.json', '.git', 'venv'
+                                'Pipfile', 'pyrightconfig.json', '.git', 'venv', '_root'
                             )(fname)
                             if root then
                                 print("Detected LSP root:", root)
@@ -109,6 +109,8 @@ return {
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
                         capabilities = capabilities,
+                        root_dir = root_files,
+                        --lspconfig.util.root_pattern(".git", "_root"),
                         settings = {
                             Lua = {
                                 format = {

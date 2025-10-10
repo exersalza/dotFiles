@@ -7,6 +7,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "fredrikaverpil/neotest-golang",
         "leoluz/nvim-dap-go",
+        "rouge8/neotest-rust",
     },
     config = function()
         require("neotest").setup({
@@ -14,6 +15,7 @@ return {
                 require("neotest-golang")({
                     dap = { justMyCode = false },
                 }),
+                require("neotest-rust"),
             },
         })
 
