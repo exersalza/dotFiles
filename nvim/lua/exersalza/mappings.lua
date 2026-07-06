@@ -126,7 +126,7 @@ end, { desc = "Enter output" })
 
 
 -- codedocs
-map("n", "<leader>k", require('codedocs').insert_docs, { desc = "Inserts a docstring into the buffer" })
+-- map("n", "<leader>k", require('codedocs').insert_docs, { desc = "Inserts a docstring into the buffer" })
 
 -- map("n", "<leader>fF" , function() require("telescope.builtin").find_files({hidden = true}) end, {desc = "open file picker with hidden files"})
 -- map("n", "<leader>ff" , function() require("telescope.builtin").find_files({hidden = false, }) end, {desc = "open file picker without hidden files"})
@@ -169,7 +169,7 @@ map("v", "<A-d>", "5j")
 
 -- formatting
 map("n", "<leader>fm", function()
-    vim.lsp.buf.format()
+    require("conform").format({ async = true })
 end)
 
 

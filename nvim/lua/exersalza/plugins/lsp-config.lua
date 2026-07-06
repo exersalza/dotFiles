@@ -61,6 +61,7 @@ return {
                 "cssls",        -- CSS
                 "jsonls",       -- JSON
                 "bashls",       -- Bash
+                "svelte",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -105,6 +106,42 @@ return {
                         end
                     })
                 end,
+                ["ts_ls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.ts_ls.setup {
+                        capabilities = capabilities,
+                        filetypes = { "js", "ts", "jsx", "tsx" }, -- Add svelte here
+                    }
+                end,
+                ["html"] = function ()
+                    require("lspconfig").html.setup({
+                        capabilities = capabilities,
+                        filetypes = { "html", "htm" }
+                    })
+                end,
+                ["svelte"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.svelte.setup({
+                        capabilities = capabilities,
+                        on_attach = function(client)
+                            client.server_capabilities.documentFormattingProvider = false
+                        end,
+                        root_dir = lspconfig.util.root_pattern(
+                            "svelte.config.js",
+                            "svelte.config.cjs",
+                            "vite.config.ts",
+                            "vite.config.js",
+                            "tsconfig.json",
+                            "jsconfig.json",
+                            ".git"
+                        ),
+                        settings = {
+                            svelte = {
+                                enableTsPlugin = true,
+                            },
+                        },
+                    })
+                end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
@@ -124,6 +161,36 @@ return {
                                 },
                             }
                         }
+                    }
+                end,
+                ["rust_analyzer"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.rust_analyzer.setup {
+                        capabilities = capabilities,
+                        root_dir = lspconfig.util.root_pattern("Cargo.toml", "Cargo.lock"),
+                        settings = {
+                            ["rust-analyzer"] = {
+                                -- reduce indexing load
+                                files = {
+                                    excludeDirs = {
+                                        "target",
+                                        "node_modules",
+                                        ".git",
+                                        "dist",
+                                        "build",
+                                    },
+                                },
+                                -- avoid heavy features if you don’t need them
+                                procMacro = { enable = false },
+                                cargo = {
+                                    loadOutDirsFromCheck = true,
+                                    allFeatures = false,
+                                },
+                                checkOnSave = {
+                                    command = "cargo check",
+                                },
+                            },
+                        },
                     }
                 end,
             }
@@ -154,7 +221,7 @@ return {
         vim.diagnostic.config({
             -- update_in_insert = true,
             float = {
-                focusable = false,
+                focusable = true,
                 style = "minimal",
                 border = "rounded",
                 source = "always",
