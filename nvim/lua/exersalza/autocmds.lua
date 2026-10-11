@@ -6,3 +6,10 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     vim.api.nvim_win_set_cursor(0, save_cursor)
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "svelte",
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
